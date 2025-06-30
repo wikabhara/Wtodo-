@@ -7,23 +7,21 @@ function App() {
   // const [count, setCount] = useState(0);
 
   return (
-    <div className="w-full border border-red-500">
-      <div className="min-h-screen bg-base-100 flex flex-col">
-        {/* Navbar Full Width */}
-        <div className="w-full bg-base-200 shadow-md px-6 py-3">
-          <div className="navbar p-0">
-            <a className="btn btn-ghost text-xl">Todo App</a>
-          </div>
+    <div className="min-h-screen w-full bg-base-100 flex flex-col">
+      <div className="w-full bg-base-200 shadow-md px-6 py-3">
+        <div className="flex items-center justify-between">
+          <h1 className="text-xl font-bold text-primary">Todo App</h1>
         </div>
+      </div>
 
-        {/* Konten utama */}
-        <div className="w-full flex gap-4 px-6 py-6">
-          <div className="flex-1 card bg-base-300 rounded-box h-32 grid place-items-center">
-            content 1
-          </div>
-          <div className="flex-1 card bg-base-300 rounded-box h-32 grid place-items-center">
-            content 2
-          </div>
+      {/* Main content */}
+      <div className="flex w-full flex-col">
+        <div className="card bg-base-300 rounded-box grid h-20 place-items-center">
+          content
+        </div>
+        <div className="divider"></div>
+        <div className="card bg-base-300 rounded-box grid h-20 place-items-center">
+          content
         </div>
       </div>
     </div>
