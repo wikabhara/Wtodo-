@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -16,10 +17,10 @@ function App() {
         method: "GET",
       });
       const result = await response.json();
-      console.log("Fetched todos:", result);
+      console.log(result);
       setTodos(result);
     } catch (error) {
-      console.log("Error fetching todos:", error);
+      console.log(error);
     }
   }
 
@@ -41,12 +42,45 @@ function App() {
     setTodos([...todos, newTodo]);
   }
 
+  async function deleteTodo(id) {
+    try {
+      const response = await fetch(`http://localhost:3000/todos/${id}`, {
+        method: "GET",
+      });
+      const foundTodo = await response.json();
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`http://localhost:3000/todos/${foundTodo.id}`, {
+            method: "DELETE",
+          });
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: "You have Successfully remove the selected task :)",
+          });
+          fetchTodos();
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     fetchTodos();
   }, []);
 
   return (
     <>
+      {/* NavBar */}
       <div className="w-full bg-base-200 shadow-md px-6 py-3">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold text-primary">Todo App</h1>
@@ -55,8 +89,8 @@ function App() {
 
       {/* Input Field */}
       <div className="flex w-full flex-col">
+        {/* Form Create */}
         <div className="card bg-base-300 rounded-box grid place-items-center">
-          {/* Form Create */}
           <form
             onSubmit={createTodo}
             action=""
@@ -94,8 +128,9 @@ function App() {
             </label>
             <button className="btn btn-primary">Submit</button>
           </form>
-          {/* Form Create end*/}
         </div>
+        {/* Form Create end*/}
+
         <div className="divider"></div>
 
         {/* TodoCard */}
@@ -107,6 +142,7 @@ function App() {
                 title={t.title}
                 task={t.task}
                 status={t.status}
+                onDelete={() => deleteTodo(t.id)}
               />
             ))}
           </div>
