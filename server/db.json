@@ -17,6 +17,18 @@
       "title": "Gym",
       "task": "Leg Day",
       "status": "COMPLETED"
+    },
+    {
+      "id": "4",
+      "title": "Golf",
+      "task": "at Ciputra",
+      "status": "OPEN"
+    },
+    {
+      "id": "5",
+      "title": "Meeting API",
+      "task": "with Bantusaku",
+      "status": "ONGOING"
     }
   ]
 }

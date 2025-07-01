@@ -5,7 +5,7 @@ import "./App.css";
 import TodoCard from "./components/TodoCard";
 
 function App() {
-  const [Todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState("");
   const [task, setTask] = useState("");
   const [status, setStatus] = useState("OPEN");
@@ -16,16 +16,29 @@ function App() {
         method: "GET",
       });
       const result = await response.json();
-      console.log(result);
+      console.log("Fetched todos:", result);
       setTodos(result);
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching todos:", error);
     }
   }
 
   async function createTodo(event) {
     event.preventDefault();
-    console.log(title, task, status);
+    const newId =
+      todos.length > 0 ? String(parseInt(todos.at(-1).id) + 1) : "1";
+    const newTodo = {
+      id: newId,
+      title: title,
+      task: task,
+      status: status,
+    };
+    await fetch("http://localhost:3000/todos", {
+      method: "POST",
+      body: JSON.stringify(newTodo),
+    });
+
+    setTodos([...todos, newTodo]);
   }
 
   useEffect(() => {
@@ -88,7 +101,7 @@ function App() {
         {/* TodoCard */}
         <div className="card bg-base-300 rounded-box grid place-items-center">
           <div className="flex-row flex-wrap py-10 gap-6">
-            {Todos.map((t) => (
+            {todos.map((t) => (
               <TodoCard
                 key={t.id}
                 title={t.title}
