@@ -2,17 +2,20 @@
   "todos": [
     {
       "id": "1",
-      "task": "Reading",
+      "title": "Reading",
+      "task": "Reading Animal Farm",
       "status": "OPEN"
     },
     {
       "id": "2",
+      "title": "Studying",
       "task": "Belajar React",
       "status": "ONGOING"
     },
     {
       "id": "3",
-      "task": "Gym",
+      "title": "Gym",
+      "task": "Leg Day",
       "status": "COMPLETED"
     }
   ]
