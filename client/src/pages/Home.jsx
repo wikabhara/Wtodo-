@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import "../App.css";
+import { useNavigate } from "react-router";
 import TodoCard from "../components/TodoCard";
-import Navbar from "../components/Navbar";
 
 function Home() {
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState("");
   const [task, setTask] = useState("");
   const [status, setStatus] = useState("OPEN");
+  let navigate = useNavigate();
 
   async function fetchTodos() {
     try {
@@ -81,6 +82,10 @@ function Home() {
     }
   }
 
+  function editTodo(id) {
+    navigate(`/${id}`);
+  }
+
   useEffect(() => {
     fetchTodos();
   }, []);
@@ -96,7 +101,7 @@ function Home() {
           <form
             onSubmit={createTodo}
             action=""
-            className="flex-row flex-wrap py-10 gap-6">
+            className="flex-row flex-wrap py-5">
             <h1>Create Todo</h1>
             <label className="input">
               <span className="label">Title</span>
@@ -137,7 +142,7 @@ function Home() {
 
         {/* TodoCard */}
         <div className="card bg-base-300 rounded-box grid place-items-center">
-          <div className="flex-row flex-wrap py-10 gap-6">
+          <div className="flex-row flex-wrap py-5">
             {todos.map((t) => (
               <TodoCard
                 key={t.id}
@@ -145,6 +150,7 @@ function Home() {
                 task={t.task}
                 status={t.status}
                 onDelete={() => deleteTodo(t.id)}
+                onEdit={() => editTodo(t.id)}
               />
             ))}
           </div>
