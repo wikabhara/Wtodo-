@@ -17,7 +17,7 @@ function Home() {
         method: "GET",
       });
       const result = await response.json();
-      console.log(result);
+
       setTodos(result);
     } catch (error) {
       Swal.fire({
