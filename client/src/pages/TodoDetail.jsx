@@ -14,7 +14,11 @@ export default function TodoDetail() {
       console.log(foundTodo);
       setTodo(foundTodo);
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   }
 
@@ -27,7 +31,11 @@ export default function TodoDetail() {
       });
       navigate("/");
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   }
 
