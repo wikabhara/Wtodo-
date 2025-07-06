@@ -42,7 +42,6 @@ function Home() {
       method: "POST",
       body: JSON.stringify(newTodo),
     });
-
     setTodos([...todos, newTodo]);
   }
 
@@ -102,7 +101,7 @@ function Home() {
             onSubmit={createTodo}
             action=""
             className="flex-row flex-wrap py-5">
-            <h1 className="pb-1.5">Create Todo</h1>
+            <h1 className="pb-1.5">Create Task ToDo!</h1>
             <div className="pb-1">
               <label className="input">
                 <span className="label">Title</span>
