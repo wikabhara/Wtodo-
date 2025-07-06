@@ -96,23 +96,26 @@ function Home() {
 
       {/* Input Field */}
       <div className="flex w-full flex-col">
-        {/* Form Create */}
+        {/* Form-Create */}
         <div className="card bg-base-300 rounded-box grid place-items-center">
           <form
             onSubmit={createTodo}
             action=""
             className="flex-row flex-wrap py-5">
-            <h1>Create Todo</h1>
-            <label className="input">
-              <span className="label">Title</span>
-              <input
-                onChange={(e) => setTitle(e.target.value)}
-                value={title}
-                type="text"
-                placeholder="Type title here..."
-              />
-            </label>
-            <div>
+            <h1 className="pb-1.5">Create Todo</h1>
+            <div className="pb-1">
+              <label className="input">
+                <span className="label">Title</span>
+                <input
+                  onChange={(e) => setTitle(e.target.value)}
+                  value={title}
+                  type="text"
+                  placeholder="Type title here..."
+                />
+              </label>
+            </div>
+
+            <div className="pb-1">
               <label className="input">
                 <span className="label">Task</span>
                 <input
@@ -123,26 +126,29 @@ function Home() {
                 />
               </label>
             </div>
-            <label className="select">
-              <span className="label">Status</span>
-              <select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}>
-                <option value="OPEN">OPEN</option>
-                <option value="ONGOING">ONGOING</option>
-                <option value="COMPLETED">COMPLETED</option>
-              </select>
-            </label>
+            <div className="pb-1">
+              <label className="select">
+                <span className="label">Status</span>
+                <select
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}>
+                  <option value="OPEN">OPEN</option>
+                  <option value="ONGOING">ONGOING</option>
+                  <option value="COMPLETED">COMPLETED</option>
+                </select>
+              </label>
+            </div>
+
             <button className="btn btn-primary">Submit</button>
           </form>
         </div>
-        {/* Form Create end*/}
+        {/* Form-Create-end*/}
 
         <div className="divider"></div>
 
         {/* TodoCard */}
         <div className="card bg-base-300 rounded-box grid place-items-center">
-          <div className="flex-row flex-wrap py-5">
+          <div className="flex-row py-5">
             {todos.map((t) => (
               <TodoCard
                 key={t.id}
