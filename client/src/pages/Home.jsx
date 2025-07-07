@@ -13,9 +13,12 @@ function Home() {
 
   async function fetchTodos() {
     try {
-      const response = await fetch("http://localhost:3000/todos", {
-        method: "GET",
-      });
+      const response = await fetch(
+        "https://hulking-spiffy-duck.glitch.me/todos",
+        {
+          method: "GET",
+        }
+      );
       const result = await response.json();
 
       setTodos(result);
@@ -38,19 +41,29 @@ function Home() {
       task: task,
       status: status,
     };
-    await fetch("http://localhost:3000/todos", {
-      method: "POST",
-      body: JSON.stringify(newTodo),
-    });
-    setTodos([...todos, newTodo]);
+    const response = await fetch(
+      "https://hulking-spiffy-duck.glitch.me/todos",
+      {
+        method: "POST",
+        body: JSON.stringify(newTodo),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const result = await response.json();
+    console.log(result);
+    await fetchTodos();
   }
 
   async function deleteTodo(id) {
     try {
-      const response = await fetch(`http://localhost:3000/todos/${id}`, {
-        method: "GET",
-      });
+      const response = await fetch(
+        `https://hulking-spiffy-duck.glitch.me/todos/${id}`,
+        {
+          method: "GET",
+        }
+      );
       const foundTodo = await response.json();
+      console.log(foundTodo);
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -59,19 +72,25 @@ function Home() {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          fetch(`http://localhost:3000/todos/${foundTodo.id}`, {
-            method: "DELETE",
-          });
+      })
+        .then((result) => {
+          if (result.isConfirmed) {
+            return fetch(
+              `https://hulking-spiffy-duck.glitch.me/todos/${foundTodo.id}`,
+              {
+                method: "DELETE",
+              }
+            );
+          }
+        })
+        .then(() => {
           Swal.fire({
             icon: "success",
             title: "Success!",
             text: "You have Successfully remove the selected task :)",
           });
           fetchTodos();
-        }
-      });
+        });
     } catch (error) {
       Swal.fire({
         icon: "error",
