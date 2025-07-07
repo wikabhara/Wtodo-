@@ -9,9 +9,7 @@ export default function TodoDetail() {
 
   async function fetchTodoById(id) {
     try {
-      const response = await fetch(
-        `https://hulking-spiffy-duck.glitch.me/todos/${id}`
-      );
+      const response = await fetch(`http://localhost:3000/todos/${id}`);
       const foundTodo = await response.json();
       console.log(foundTodo);
       setTodo(foundTodo);
@@ -27,7 +25,7 @@ export default function TodoDetail() {
   async function submitEditTodo(e) {
     e.preventDefault();
     try {
-      await fetch(`https://hulking-spiffy-duck.glitch.me/todos/${id}`, {
+      await fetch(`http://localhost:3000/todos/${id}`, {
         method: "PATCH",
         body: JSON.stringify(todo),
       });

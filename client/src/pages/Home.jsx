@@ -13,12 +13,9 @@ function Home() {
 
   async function fetchTodos() {
     try {
-      const response = await fetch(
-        "https://hulking-spiffy-duck.glitch.me/todos",
-        {
-          method: "GET",
-        }
-      );
+      const response = await fetch("http://localhost:3000/todos", {
+        method: "GET",
+      });
       const result = await response.json();
 
       setTodos(result);
@@ -41,7 +38,7 @@ function Home() {
       task: task,
       status: status,
     };
-    await fetch("https://hulking-spiffy-duck.glitch.me/todos/", {
+    await fetch("http://localhost:3000/todos", {
       method: "POST",
       body: JSON.stringify(newTodo),
     });
@@ -50,12 +47,9 @@ function Home() {
 
   async function deleteTodo(id) {
     try {
-      const response = await fetch(
-        `https://hulking-spiffy-duck.glitch.me/todos/${id}`,
-        {
-          method: "GET",
-        }
-      );
+      const response = await fetch(`http://localhost:3000/todos/${id}`, {
+        method: "GET",
+      });
       const foundTodo = await response.json();
       Swal.fire({
         title: "Are you sure?",
@@ -67,7 +61,7 @@ function Home() {
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`https://hulking-spiffy-duck.glitch.me/todos/${foundTodo.id}`, {
+          fetch(`http://localhost:3000/todos/${foundTodo.id}`, {
             method: "DELETE",
           });
           Swal.fire({
